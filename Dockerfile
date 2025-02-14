@@ -7,4 +7,5 @@ RUN apt -y install unzip
 RUN sh ./install_aws_cli.sh && sh ./install_ansible.sh
 RUN pipx ensurepath
 RUN export PATH="/root/.local/bin:$PATH"
+RUN printenv
 CMD [ "/bin/bash" ]

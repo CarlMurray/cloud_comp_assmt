@@ -42,6 +42,6 @@ elif podman ps -a | grep -q $container_name; then
     podman start $container_name
     echo "Starting container..."
 else
-    podman run -itd -v $volume_name:/workspace --name=$container_name $image_name
+    podman run -itd -v $volume_name:/workspace --name=$container_name --env-file ./.env $image_name
     echo "Running container..."
 fi
