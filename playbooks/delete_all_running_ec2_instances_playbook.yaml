@@ -1,0 +1,10 @@
+- name: Delete all running instances
+  hosts: localhost
+  tasks:
+    - amazon.aws.ec2_instance:
+        region: eu-west-1
+        aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY') }}"
+        aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+        state: absent
+        filters:
+          instance-state-name: running

@@ -1,0 +1,12 @@
+- name: Provision an EC2 instance
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Provision an EC2 instance
+      amazon.aws.ec2_instance:
+        name: "{{instance_name}}"
+        region: eu-west-1
+        instance_type: t2.micro
+        aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY') }}"
+        aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+        image_id: ami-03fd334507439f4d1 # Ubuntu
