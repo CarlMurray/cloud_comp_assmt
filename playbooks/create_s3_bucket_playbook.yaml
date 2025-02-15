@@ -1,0 +1,11 @@
+- name: Create S3 bucket
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create S3 bucket
+      amazon.aws.s3_bucket:
+        aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY') }}"
+        aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+        region: eu-west-1
+        name: "{{bucket_name}}"
+        state: present
