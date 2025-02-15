@@ -8,6 +8,7 @@ RUN apt -y install unzip
 RUN apt -y install pip
 RUN sh ./install_aws_cli.sh && sh ./install_ansible.sh
 RUN pipx ensurepath
+ENV PATH="/root/.local/bin:${PATH}"
 RUN echo "export PATH='/root/.local/bin:$PATH'" >> ~/.bashrc
 RUN exec bash
 CMD [ "/bin/bash" ]
