@@ -4,3 +4,5 @@ apt update
 apt -y install pipx
 pipx ensurepath
 pipx install --include-deps ansible
+pip install boto3
+pipx inject ansible boto3
