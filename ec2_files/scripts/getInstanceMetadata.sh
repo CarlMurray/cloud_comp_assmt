@@ -34,6 +34,3 @@ for key in "${keys[@]}"; do
         "http://169.254.169.254/latest/meta-data/$key")
     echo "<div>$key : $output</div>" >>"$METADATA_FILE"
 done
-
-# Move the file to /home/ubuntu (ensure the script runs as root or has permissions)
-sudo mv "$METADATA_FILE" /usr/local/apache2/htdocs/
