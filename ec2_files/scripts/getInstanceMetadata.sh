@@ -18,7 +18,7 @@ keys=('ami-id'
     'security-groups')
 
 # Create the metadata HTML file
-METADATA_FILE=~/metadata.html
+METADATA_FILE=/home/ubuntu/metadata.html
 echo "" >"$METADATA_FILE"
 
 # Ensure proper permissions
