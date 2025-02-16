@@ -1,5 +1,7 @@
 const form = document.querySelector("form");
+const keyInputField = document.querySelector('[name="key"]');
 const fileInputField = document.querySelector('[name="file"]');
+const bucketInputField = document.querySelector('[name="bucket"]');
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -8,19 +10,33 @@ form.addEventListener("submit", async (e) => {
 
 async function uploadFile() {
   const file = fileInputField.files[0];
-  //TODO: Add key field
-  console.log(file);
+  const key = keyInputField.value;
+  const bucket = bucketInputField.value;
 
-  const res = await fetch(
-    "https://cloud-computing-bucket-17.s3.eu-west-1.amazonaws.com/test2?X-Amz-Expires=21600&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ3EGUE4T5AL6AXEW/20250215/eu-west-1/s3/aws4_request&X-Amz-Date=20250215T235322Z&X-Amz-SignedHeaders=content-type;host&X-Amz-Signature=d883a9e38e4f8b8f36ee6ab013e8c67738c5ca774a4d7171bbc16a07d42fc537",
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": file.type, //TODO: send file type to backend to ensure identical
-      },
-      body: file,
-    }
-  );
+  const preSignedUrl = await getPresignedUrl(file, key, bucket);
 
+  const res = await fetch(preSignedUrl, {
+    method: "PUT",
+    headers: {
+      "Content-Type": file.type,
+    },
+    body: { file: file, key: key, bucket: bucket },
+  });
+
+  return res.text();
+}
+
+async function getPresignedUrl(file, key, bucket) {
+  const res = await fetch("http://localhost:5191/GenerateSignedUrl", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      contentType: file.type,
+      key: key,
+      bucket: bucket,
+    }),
+  });
   return res.text();
 }
