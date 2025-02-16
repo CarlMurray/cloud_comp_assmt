@@ -42,9 +42,8 @@ async function getPresignedUrl(file, key, bucket) {
 }
 
 async function getMetadata() {
-  const res = await fetch("http://localhost:5500/html/metadata.html");
+  const res = await fetch(`${window.location.origin}/metadata.html`);
   const data = res.text();
-  console.log(data);
   return data;
 }
 
