@@ -22,4 +22,6 @@
         security_group: "HTTP/HTTPS/SSH" # Existing EC2 security group
         network_interfaces:
           - assign_public_ip: true
-        user_data: "{{lookup('file','../html/getInstanceMetadata.sh')}}" # EC2 user data launch script
+        user_data: |
+          {{ lookup('file', '../ec2_files/scripts/getInstanceMetadata.sh') }}
+          {{ lookup('file', '../ec2_files/scripts/launchScriptInstallPackages.sh') }}
