@@ -36,4 +36,4 @@ for key in "${keys[@]}"; do
 done
 
 # Move the file to /home/ubuntu (ensure the script runs as root or has permissions)
-sudo mv "$METADATA_FILE" /home/ubuntu/
+sudo mv "$METADATA_FILE" /usr/local/apache2/htdocs/

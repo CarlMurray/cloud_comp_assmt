@@ -40,3 +40,18 @@ async function getPresignedUrl(file, key, bucket) {
   });
   return res.text();
 }
+
+async function getMetadata() {
+  const res = await fetch("http://localhost:5500/html/metadata.html");
+  const data = res.text();
+  console.log(data);
+  return data;
+}
+
+async function main() {
+  const metadata = (document.createElement("div").innerHTML =
+    await getMetadata());
+  const metadataContainer = document.getElementById("metadata");
+  metadataContainer.innerHTML = metadata;
+}
+main();
