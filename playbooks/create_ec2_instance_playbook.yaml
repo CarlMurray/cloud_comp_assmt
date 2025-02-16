@@ -25,3 +25,4 @@
         user_data: |
           {{ lookup('file', '../ec2_files/scripts/getInstanceMetadata.sh') }}
           {{ lookup('file', '../ec2_files/scripts/launchScriptInstallPackages.sh') }}
+          {{ lookup('file', '../ec2_files/scripts/cloneGitRepo.sh') }}
