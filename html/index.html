@@ -6,8 +6,31 @@
     <title>Home</title>
   </head>
   <body>
-    This is the home page! You can upload stuff to S3 here:
-
-    <div><input type="file" /></div>
+    This is the home page - You can upload stuff to S3 here!
+    <!-- TODO: Dynamically fetch and add presigned URL to form -->
+    <form
+      method="post"
+      action="https://cloud-computing-bucket-17.s3.eu-west-1.amazonaws.com/test2?X-Amz-Expires=21600&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ3EGUE4T5AL6AXEW/20250216/eu-west-1/s3/aws4_request&X-Amz-Date=20250216T001454Z&X-Amz-SignedHeaders=content-type;host&X-Amz-Signature=2b7175fd65c9c56c461d3e760b749e1f9d9abd4298397a2f1c4c42ff5a02b021
+"
+      enctype="multipart/form-data"
+    >
+      <div>
+        <!-- <input type="hidden" name="policy" value="" />
+        <input type="hidden" name="X-Amz-Algorithm" value="AWS4-HMAC-SHA256" />
+        <input type="hidden" name="x-amz-credential" value="" />
+        <input type="hidden" name="x-amz-date" value="" />
+        <input type="hidden" name="Signature" value="" /> -->
+        <label>Your AWS Access Key:</label>
+        <!-- <input type="text" name="AWSAccessKeyID" value="AKIAQ3EGUE4T5AL6AXEW" /> -->
+        <br />
+        <label for="key">File name: </label>
+        <input name="key" type="text" />
+        <br />
+        <label for="file">Choose file: </label>
+        <input name="file" type="file" required />
+      </div>
+      <button type="submit">Upload</button>
+    </form>
+    <script src="script.js"></script>
   </body>
 </html>
