@@ -1,8 +1,16 @@
-- name: Provision an EC2 instance
+- name: Provision an EC2 instance with public IP and ssh key.
   hosts: localhost
   gather_facts: false
+  vars:
+    key_name: ssh_key.pem # Default ssh key name
+    instance_name: new_instance # Default instance name
   tasks:
-    - name: Provision an EC2 instance
+    - name: Create ssh key.
+      amazon.aws.ec2_key:
+        name: "{{ key_name }}"
+        file_name: ~/Downloads/{{key_name}} # Saves the key locally
+      register: ssh_key
+    - name: Provision EC2 instance.
       amazon.aws.ec2_instance:
         name: "{{instance_name}}"
         region: eu-west-1
@@ -10,3 +18,8 @@
         aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY') }}"
         aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
         image_id: ami-03fd334507439f4d1 # Ubuntu
+        key_name: "{{key_name}}"
+        security_group: "HTTP/HTTPS/SSH" # Existing EC2 security group
+        network_interfaces:
+          - assign_public_ip: true
+        user_data: "{{lookup('file','../html/getInstanceMetadata.sh')}}" # EC2 user data launch script
