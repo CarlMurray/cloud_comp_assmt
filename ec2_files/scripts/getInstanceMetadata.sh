@@ -34,3 +34,6 @@ for key in "${keys[@]}"; do
         "http://169.254.169.254/latest/meta-data/$key")
     echo "<div>$key : $output</div>" >>"$METADATA_FILE"
 done
+
+chown ubuntu /home/ubuntu -R
+mv $METADATA_FILE cloud_comp_assmt/ec2_files
