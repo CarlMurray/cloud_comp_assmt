@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="padding: 30px">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,11 +12,21 @@
     />
   </head>
   <body>
-    This is the home page - You can upload stuff to S3 here!
+    <h1>This is the home page - You can upload stuff to S3 here!</h1>
+    <nav class="navbar navbar-expand">
+      <ul class="navbar-nav">
+        <li class="nav-item me-2"><a href="./">Home</a></li>
+        <li class="nav-item me-2"><a href="./page-2.html">Page 2</a></li>
+        <li class="nav-item me-2"><a href="./page-3.html">Page 3</a></li>
+        <li class="nav-item me-2"><a href="./page-4.html">Page 4</a></li>
+        <li class="nav-item me-2"><a href="./page-5.html">Page 5</a></li>
+      </ul>
+    </nav>
     <form method="post" enctype="multipart/form-data">
       <div>
         <label for="bucket">Bucket name: </label>
         <input
+          class="form-control"
           name="bucket"
           type="text"
           id="bucket"
@@ -25,12 +35,19 @@
         />
         <br />
         <label for="key">File name: </label>
-        <input name="key" type="text" id="key" required />
+        <input class="form-control" name="key" type="text" id="key" required />
         <br />
         <label for="file">Choose file: </label>
-        <input name="file" type="file" id="file" required />
+        <input
+          class="form-control"
+          name="file"
+          type="file"
+          id="file"
+          required
+        />
       </div>
-      <button type="submit">Upload</button>
+      <br />
+      <button class="form-control btn btn-primary" type="submit">Upload</button>
     </form>
     <script src="script.js"></script>
     <hr />
