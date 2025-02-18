@@ -20,12 +20,12 @@ public class GenerateSignedUrlController : ControllerBase
         {
             body = JsonSerializer.Deserialize<Dictionary<string, string>>(await reader.ReadToEndAsync())!;
         }
-        var client = new AmazonS3Client(RegionEndpoint.EUWest1);
+        var credentials = new BasicAWSCredentials(Environment.GetEnvironmentVariable("AWS_ACCESS_KEY"), Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY"));
+        var client = new AmazonS3Client(credentials: credentials, region: RegionEndpoint.EUWest1);
         var request = new Amazon.S3.Model.GetPreSignedUrlRequest
         {
             BucketName = body["bucket"],
             Key = body["key"],
-            // Key = Guid.NewGuid().ToString(),
             Expires = DateTime.Now.AddHours(6),
             Verb = HttpVerb.PUT,
             ContentType = body["contentType"]
