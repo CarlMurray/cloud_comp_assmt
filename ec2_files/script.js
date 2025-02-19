@@ -27,7 +27,7 @@ async function uploadFile() {
 }
 
 async function getPresignedUrl(file, key, bucket) {
-  SERVER_URL = "http://localhost:8080/GenerateSignedUrl"; // Ensure server running at this address
+  SERVER_URL = `${window.location.origin}:8080/GenerateSignedUrl`; // Ensure server running at this address
   const res = await fetch(SERVER_URL, {
     method: "POST",
     headers: {
