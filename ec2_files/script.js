@@ -27,9 +27,8 @@ async function uploadFile() {
 }
 
 async function getPresignedUrl(file, key, bucket) {
-  ENV_DEV_URL = "http://localhost:5191/GenerateSignedUrl"; // for local dev
-  ENV_DEV_PRD = "http://server:5191/GenerateSignedUrl"; // production server hostname
-  const res = await fetch(ENV_DEV_PRD, {
+  SERVER_URL = "http://localhost:8080/GenerateSignedUrl"; // Ensure server running at this address
+  const res = await fetch(SERVER_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
