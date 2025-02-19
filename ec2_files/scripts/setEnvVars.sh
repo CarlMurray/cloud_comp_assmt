@@ -8,3 +8,4 @@ AWS_ACCESS_KEY=$(aws ssm get-parameter --name ACCESS_KEY --region eu-west-1 --wi
 AWS_SECRET_ACCESS_KEY=$(aws ssm get-parameter --name SECRET_ACCESS_KEY --region eu-west-1 --with-decryption --query Parameter.Value)
 echo "AWS_ACCESS_KEY=$AWS_ACCESS_KEY" >>/etc/environment
 echo "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >>/etc/environment
+source /etc/environment
