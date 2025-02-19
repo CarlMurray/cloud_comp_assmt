@@ -18,7 +18,7 @@ keys=('ami-id'
     'security-groups')
 
 # Create the metadata HTML file
-METADATA_FILE=/home/ubuntu/metadata.html
+METADATA_FILE=/usr/local/apache2/htdocs/metadata.html
 echo "" >"$METADATA_FILE"
 
 # Ensure proper permissions
@@ -35,5 +35,4 @@ for key in "${keys[@]}"; do
     echo "<div>$key : $output</div>" >>"$METADATA_FILE"
 done
 
-chown ubuntu /home/ubuntu -R
-mv $METADATA_FILE cloud_comp_assmt/ec2_files
+chown httpd /usr/local/apache2/htdocs -R
