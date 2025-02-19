@@ -19,7 +19,7 @@ keys=('ami-id'
 
 # Create the metadata HTML file
 METADATA_FILE=/usr/local/apache2/htdocs/metadata.html
-echo "" >"$METADATA_FILE"
+touch $METADATA_FILE
 
 # Ensure proper permissions
 chmod 777 "$METADATA_FILE"
@@ -35,4 +35,4 @@ for key in "${keys[@]}"; do
     echo "<div>$key : $output</div>" >>"$METADATA_FILE"
 done
 
-chown httpd /usr/local/apache2/htdocs -R
+chown www-data /usr/local/apache2/htdocs -R
