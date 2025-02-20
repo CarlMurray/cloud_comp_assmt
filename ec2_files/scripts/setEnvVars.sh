@@ -12,3 +12,6 @@ echo "AWS_ACCESS_KEY=$AWS_ACCESS_KEY" >>/etc/environment
 echo "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >>/etc/environment
 echo "AWS_REGION=eu-west-1" >>/etc/environment
 source /etc/environment
+touch /.env
+echo "AWS_ACCESS_KEY=$AWS_ACCESS_KEY" >>/.env
+echo "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >>/.env
