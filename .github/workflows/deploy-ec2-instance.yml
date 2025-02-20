@@ -1,0 +1,25 @@
+name: Provision EC2 instance with deployed services via Ansible Playbook
+'on':
+  push:
+    branches:
+      - main
+jobs:
+  Execute-playbook:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+    - name: Update repositories
+      run: sudo apt update && sudo apt upgrade -y
+    - name: Install ansible and dependancies
+      run: pip3 install ansible
+    - name: install dependancies
+      run: pip3 install boto3 botocore
+      env:
+        AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+    - run: printenv
+    - run: echo $AWS_ACCESS_KEY
+    - name: Run ansible playbook
+      run: ansible-playbook playbooks/create_ec2_instance_playbook.yaml
