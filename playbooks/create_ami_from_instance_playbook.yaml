@@ -1,0 +1,35 @@
+- name: Create / re-create AMI.
+  hosts: localhost
+  gather_facts: false
+  vars:
+    instance_name: AssignmentInstance # Must be same name as in the create_ec2_instance playbook
+  tasks:
+    - name: Get EC2 instance to use for AMI creation.
+      amazon.aws.ec2_instance_info:
+        filters:
+          "tag:Name": "{{instance_name}}"
+      register: ec2_instances
+    - name: Check if AMI with specified name already exists.
+      amazon.aws.ec2_ami_info:
+        filters:
+          "name": AssignmentAMI
+      register: images
+    - name: Delete existing AMI as an old version exists.
+      when: images.images|length > 0 # Task only runs when the image exists
+      block:
+        - name: Delete existing AMI.
+          amazon.aws.ec2_ami:
+            image_id: "{{images.images[0].image_id}}"
+            state: absent
+        - name: Log message
+          ansible.builtin.debug:
+            msg: Existing AMI deleted.
+    - name: Create AMI
+      block:
+        - name: Create new AMI from EC2 instance
+          amazon.aws.ec2_ami:
+            instance_id: "{{ ec2_instances.instances[0].instance_id }}"
+            name: AssignmentAMI
+        - name: Log message
+          ansible.builtin.debug:
+            msg: Image created.
