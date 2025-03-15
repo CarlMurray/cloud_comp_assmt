@@ -7,8 +7,10 @@ services:
       - 80:80
       - 443:443  
     restart: always
+    volumes:
+      - /home/ubuntu/cloud_comp_assmt/ec2_files/scripts:/scripts
     post_start:
-    - command: bash ./scripts/getInstanceMetadata.sh
+    - command: bash /scripts/getInstanceMetadata.sh
       user: root
       privileged: true
   server:
