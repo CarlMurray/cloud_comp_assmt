@@ -18,9 +18,9 @@ keys=('ami-id'
     'security-groups')
 
 # Create the metadata HTML file
-METADATA_FILE=../metadata.html
-rm $METADATA_FILE
+METADATA_FILE=/usr/local/apache2/htdocs/metadata.html
 touch $METADATA_FILE
+echo >$METADATA_FILE # Clear any existing contents, if any, for new scaling instances.
 
 # Ensure proper permissions
 chmod 777 "$METADATA_FILE"
