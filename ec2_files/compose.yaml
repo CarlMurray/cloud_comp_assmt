@@ -7,6 +7,10 @@ services:
       - 80:80
       - 443:443  
     restart: always
+    post_start:
+    - command: bash ./scripts/getInstanceMetadata.sh
+      user: root
+      privileged: true
   server:
     build: ../server/
     ports:

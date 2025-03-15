@@ -18,7 +18,8 @@ keys=('ami-id'
     'security-groups')
 
 # Create the metadata HTML file
-METADATA_FILE=/usr/local/apache2/htdocs/metadata.html
+METADATA_FILE=../metadata.html
+rm $METADATA_FILE
 touch $METADATA_FILE
 
 # Ensure proper permissions
